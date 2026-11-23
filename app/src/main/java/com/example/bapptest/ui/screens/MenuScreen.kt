@@ -15,6 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -45,6 +47,8 @@ fun MenuScreen(
     correoUsuario: String,
     alLevantarRack: () -> Unit,
     alVerRacks: () -> Unit,
+    alVerRacksRemotos: () -> Unit,
+    alVerClima: () -> Unit,
     alCerrarSesion: () -> Unit
 ) {
     var opcionesVisibles by remember { mutableStateOf(false) }
@@ -59,27 +63,46 @@ fun MenuScreen(
             color = Color.White.copy(alpha = 0.8f),
             fontSize = 14.sp
         )
-        Spacer(Modifier.height(40.dp))
+        Spacer(Modifier.height(24.dp))
         AnimatedVisibility(
             visible = opcionesVisibles,
             enter = fadeIn(tween(700)) + slideInVertically(tween(700)) { it / 3 }
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                BotonOpcionMenu(
-                    texto = "Levantar un\nRack nuevo",
-                    icono = Icons.Default.Add,
-                    alPulsar = alLevantarRack,
-                    modifier = Modifier.weight(1f)
-                )
-                BotonOpcionMenu(
-                    texto = "Racks\nregistrados",
-                    icono = Icons.AutoMirrored.Filled.List,
-                    alPulsar = alVerRacks,
-                    modifier = Modifier.weight(1f)
-                )
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    BotonOpcionMenu(
+                        texto = "Levantar un\nRack nuevo",
+                        icono = Icons.Default.Add,
+                        alPulsar = alLevantarRack,
+                        modifier = Modifier.weight(1f)
+                    )
+                    BotonOpcionMenu(
+                        texto = "Racks\nregistrados",
+                        icono = Icons.AutoMirrored.Filled.List,
+                        alPulsar = alVerRacks,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    BotonOpcionMenu(
+                        texto = "Racks\nen la nube",
+                        icono = Icons.Default.Refresh,
+                        alPulsar = alVerRacksRemotos,
+                        modifier = Modifier.weight(1f)
+                    )
+                    BotonOpcionMenu(
+                        texto = "Clima\ndel sitio",
+                        icono = Icons.Default.LocationOn,
+                        alPulsar = alVerClima,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
         Spacer(Modifier.weight(1f))
@@ -100,13 +123,13 @@ private fun BotonOpcionMenu(
 ) {
     Button(
         onClick = alPulsar,
-        modifier = modifier.height(170.dp),
+        modifier = modifier.height(140.dp),
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Turquesa, contentColor = Color.White)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(icono, contentDescription = null, modifier = Modifier.size(40.dp))
-            Spacer(Modifier.height(12.dp))
+            Icon(icono, contentDescription = null, modifier = Modifier.size(36.dp))
+            Spacer(Modifier.height(8.dp))
             Text(
                 text = texto,
                 fontSize = 19.sp,
