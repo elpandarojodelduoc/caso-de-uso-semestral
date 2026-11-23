@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private const val URL_RACKS = "PONER XANO COSO"
+    private const val URL_RACKS = "https://x8ki-letl-twmt.n7.xano.io/api:V7He416y/registros_racks/"
     private const val URL_CLIMA = "https://api.open-meteo.com/"
     private const val URL_GEOCODIFICACION = "https://geocoding-api.open-meteo.com/"
 
