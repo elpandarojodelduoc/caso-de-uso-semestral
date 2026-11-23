@@ -1,7 +1,5 @@
 package com.example.bapptest.ui.components
 
-package com.example.bapptest.ui.components
-
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
