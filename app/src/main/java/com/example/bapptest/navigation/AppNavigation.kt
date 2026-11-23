@@ -6,15 +6,18 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bapptest.ui.screens.CargaScreen
 import com.example.bapptest.ui.screens.CatalogoScreen
+import com.example.bapptest.ui.screens.ClimaScreen
 import com.example.bapptest.ui.screens.LevantamientoScreen
 import com.example.bapptest.ui.screens.LoginScreen
 import com.example.bapptest.ui.screens.MenuScreen
 import com.example.bapptest.ui.screens.ProcesamientoScreen
+import com.example.bapptest.ui.screens.RacksRemotosScreen
 import com.example.bapptest.ui.screens.RacksScreen
 import com.example.bapptest.ui.screens.RegistroScreen
 import com.example.bapptest.ui.screens.RevisionScreen
@@ -29,6 +32,8 @@ object Rutas {
     const val CARGA = "carga"
     const val MENU = "menu"
     const val RACKS = "racks"
+    const val RACKS_REMOTOS = "racks_remotos"
+    const val CLIMA = "clima"
     const val LEVANTAMIENTO = "levantamiento"
     const val SUBIR_IMAGEN = "subir_imagen"
     const val PROCESAMIENTO = "procesamiento"
@@ -89,6 +94,8 @@ fun AppNavigation(
                     navController.navigate(Rutas.LEVANTAMIENTO)
                 },
                 alVerRacks = { navController.navigate(Rutas.RACKS) },
+                alVerRacksRemotos = { navController.navigate(Rutas.RACKS_REMOTOS) },
+                alVerClima = { navController.navigate(Rutas.CLIMA) },
                 alCerrarSesion = {
                     authViewModel.cerrarSesion()
                     levantamientoViewModel.reiniciar()
@@ -107,6 +114,18 @@ fun AppNavigation(
                         navController.navigate(Rutas.REVISION)
                     }
                 },
+                alVolver = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.RACKS_REMOTOS) {
+            RacksRemotosScreen(
+                viewModel = viewModel(),
+                alVolver = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.CLIMA) {
+            ClimaScreen(
+                viewModel = viewModel(),
                 alVolver = { navController.popBackStack() }
             )
         }
